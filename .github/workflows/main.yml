@@ -5,6 +5,10 @@ on:
   push:
     branches:
     - master
+    
+env:
+  AZURE_APP_NAME: test-api-deploy
+  AZURE_APP_PACKAGE_PATH: "./publish"
   
 jobs:
   publish:
@@ -25,7 +29,16 @@ jobs:
       run: dotnet build ./TestApiDeploy.sln --configuration Release --no-restore
     
     - name: Publish
-      run: dotnet publish ./TestApiDeploy.sln --configuration Release --no-build
+      run: dotnet publish ./TestApiDeploy.sln --configuration Release --no-build --output '${{ env.AZURE_APP_PACKAGE_PATH }}'
+      
+    - name: Deployment
+      uses: actions/webapps-deploy@v2
+      with:
+       app-name: ${{ env.AZURE_APP_NAME }}
+       publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+       package: "${{ env.AZURE_APP_PACKAGE_PATH }}"
+      
+      
     
     
   
