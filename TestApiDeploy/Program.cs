@@ -7,7 +7,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// enable swagger for all env's
 app.UseSwagger();
 app.UseSwaggerUI();
 
