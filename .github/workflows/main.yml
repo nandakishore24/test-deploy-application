@@ -22,10 +22,10 @@ jobs:
       run: dotnet restore ./TestApiDeploy.sln
     
     - name: Build
-      run: dotnet build ./TestApiDeploy.sln configuration Release --no-restore
+      run: dotnet build ./TestApiDeploy.sln --configuration Release --no-restore
     
     - name: Publish
-      run: dotnet release ./TestApiDeploy.sln configuration Release --no-build
+      run: dotnet publish ./TestApiDeploy.sln --configuration Release --no-build
     
     
   
